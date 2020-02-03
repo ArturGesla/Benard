@@ -22,17 +22,19 @@ BC=@(K,Ra)[BC11(K,Ra),BC12(K,Ra),BC13(K,Ra);
     BC21(K,Ra),BC22(K,Ra),BC23(K,Ra);
     BC31(K,Ra),BC32(K,Ra),BC33(K,Ra)];
 %%
-K=0.01:0.01:8;
+K=0.01:0.1:5;
 K=K';
-Ra=0.01:10:8e3;
+Ra=160:10:8000;
 z=zeros(length(K),length(Ra));
 for i=1:length(K)
     for j=1:length(Ra)
-        z(i,j)=det(BC(K(i),Ra(j)));
+        z(i,j)=real(det(BC(K(i),Ra(j))));
     end
      display(i/length(K)*100);
 end
 %%
 Z=abs(z);
 %%
-contour(Ra,K,Z)
+contour(Ra,K,z)
+%%
+surf(Ra,K,z)
